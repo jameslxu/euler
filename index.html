@@ -9,13 +9,10 @@
         margin: 0;
         padding: 0;
         background: #000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
       }
       canvas {
         display: block;
+        margin: 0 auto;
       }
     </style>
   </head>
@@ -172,7 +169,7 @@
         return createVector(Ux, Uy);
       }
 
-      // --- Mouse Interaction ---
+      // --- Mouse and Touch Interaction ---
 
       // When the mouse is pressed, first check for center clicks (to toggle associated lines);
       // if none are detected, check if a vertex was clicked (for dragging).
@@ -219,6 +216,24 @@
 
       function mouseReleased() {
         selectedVertex = -1;
+      }
+
+      // --- Touch Event Handlers ---
+      // These call the mouse event functions to enable touch support.
+
+      function touchStarted() {
+        mousePressed();
+        return false; // Prevent default behavior
+      }
+
+      function touchMoved() {
+        mouseDragged();
+        return false;
+      }
+
+      function touchEnded() {
+        mouseReleased();
+        return false;
       }
     </script>
   </body>
